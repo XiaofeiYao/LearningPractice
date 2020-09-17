@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisplus.dao.mapper.ImasAssertInfoMapper">
+    <resultMap id="BaseResultMap" type="com.example.mybatisplus.dao.entity.ImasAssertInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="found_time" jdbcType="TIMESTAMP" property="foundTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="asset_name" jdbcType="VARCHAR" property="assetName"/>
+        <result column="ip" jdbcType="VARCHAR" property="ip"/>
+        <result column="ip_value" jdbcType="BIGINT" property="ipValue"/>
+        <result column="vendor" jdbcType="VARCHAR" property="vendor"/>
+        <result column="product" jdbcType="VARCHAR" property="product"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="importance" jdbcType="INTEGER" property="importance"/>
+        <result column="is_abnormal" jdbcType="INTEGER" property="isAbnormal"/>
+        <result column="is_zombie" jdbcType="INTEGER" property="isZombie"/>
+        <result column="is_illegal" jdbcType="INTEGER" property="isIllegal"/>
+        <result column="os" jdbcType="VARCHAR" property="os"/>
+        <result column="mac" jdbcType="VARCHAR" property="mac"/>
+        <result column="version" jdbcType="VARCHAR" property="version"/>
+        <result column="os_version" jdbcType="VARCHAR" property="osVersion"/>
+        <result column="open_port_count" jdbcType="INTEGER" property="openPortCount"/>
+        <result column="vul_count" jdbcType="INTEGER" property="vulCount"/>
+        <result column="alarm_threat_attacker_count" jdbcType="INTEGER" property="alarmThreatAttackerCount"/>
+        <result column="alarm_threat_victim_count" jdbcType="INTEGER" property="alarmThreatVictimCount"/>
+        <result column="alarm_abnormal_src_count" jdbcType="INTEGER" property="alarmAbnormalSrcCount"/>
+        <result column="alarm_abnormal_dst_count" jdbcType="INTEGER" property="alarmAbnormalDstCount"/>
+        <result column="alarm_count" jdbcType="INTEGER" property="alarmCount"/>
+        <result column="use_status" jdbcType="INTEGER" property="useStatus"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="group_id" jdbcType="INTEGER" property="groupId"/>
+        <result column="source" jdbcType="INTEGER" property="source"/>
+        <result column="longitude" jdbcType="DOUBLE" property="longitude"/>
+        <result column="latitude" jdbcType="DOUBLE" property="latitude"/>
+        <result column="is_network_equipment" jdbcType="INTEGER" property="isNetworkEquipment"/>
+        <result column="is_control_equipment" jdbcType="INTEGER" property="isControlEquipment"/>
+        <result column="risk_score" jdbcType="DOUBLE" property="riskScore"/>
+        <result column="risk_level" jdbcType="INTEGER" property="riskLevel"/>
+        <result column="principal_id" jdbcType="INTEGER" property="principalId"/>
+        <result column="asset_value" jdbcType="INTEGER" property="assetValue"/>
+        <result column="asset_sn" jdbcType="VARCHAR" property="assetSn"/>
+        <result column="asset_version" jdbcType="VARCHAR" property="assetVersion"/>
+        <result column="active_time" jdbcType="TIMESTAMP" property="activeTime"/>
+        <result column="position" jdbcType="VARCHAR" property="position"/>
+        <result column="is_ics" jdbcType="INTEGER" property="isIcs"/>
+    </resultMap>
+
+    <update id="updName">
+        update imas_asset_info set asset_name = 'test' where id = 1
+    </update>
+
+</mapper>

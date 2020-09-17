@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.assetImportance.dao.mapper.AssetScreenMapper">
+
+    <resultMap id="RatioResultMap" type="com.assetImportance.model.dto.RatioResultDTO">
+        <result column="name1" property="name"/>
+        <result column="value1" property="value"/>
+        <result column="percent1" property="percent"/>
+    </resultMap>
+    <select id="queryRatioAssetImportance" resultMap="RatioResultMap">
+        SELECT
+        A.NAME as name1,	A.VALUE AS value1,
+        100 * A.VALUE	:: FLOAT / SUM ( A.VALUE ) OVER ( ) AS percent1
+     FROM
+        ( SELECT importance AS NAME, COUNT ( * ) AS VALUE FROM imas_asset_info GROUP BY importance ) AS A
+
+    </select>
+
+    <resultMap id="TrendInterfaceMap"
+               type="com.assetImportance.model.dto.request.TrendInterfaceDTO">
+        <result column="access_time" property="date"/>
+        <result column="ics_num" property="icsValue"/>
+        <result column="total" property="totalValue"/>
+    </resultMap>
+    <select id="queryTrendAssetGroupAlarmEvent" parameterType="date"
+            resultMap="TrendInterfaceMap">
+    select aaaa.access_time,ics_num,total from
+    (SELECT access_time, sum(num) as total from
+    (SELECT access_time, aa.is_ics,count(*) as num from
+      (SELECT DISTINCT
+        src_asset_id,
+        dst_asset_id,
+        access_time,
+        is_ics
+    FROM
+        imas_alarm_event,imas_asset_info
+    where
+        access_time BETWEEN #{startDate} and #{endDate} and imas_asset_info."id" in (src_asset_id, dst_asset_id)
+    ORDER BY
+        access_time ASC) as AA
+    group by access_time,is_ics
+	ORDER BY access_time ASC) as aaa
+	GROUP BY access_time) as aaaa
+	LEFT JOIN
+	(SELECT access_time, count(*) as ics_num from
+    (SELECT DISTINCT
+        src_asset_id,
+        dst_asset_id,
+        access_time,
+        is_ics
+    FROM
+        imas_alarm_event,imas_asset_info
+    where
+    access_time BETWEEN #{startDate} and #{endDate} and imas_asset_info."id" in
+    (src_asset_id,
+    dst_asset_id) and is_ics='1'
+ORDER BY
+    access_time ASC)
+		as AA
+  group by access_time,is_ics
+	ORDER BY access_time) as bbbb on aaaa.access_time=bbbb.access_time
+    </select>
+</mapper>

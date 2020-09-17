@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: ROOT
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.example.mybatisplus.dao.entity
+
+  #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+  global-config.id-type: 0
+  #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+  global-config.field-strategy: 1
+  #驼峰下划线转换
+  global-config.db-column-underline: true
+  #mp2.3+ 全局表前缀 mp_
+  #global-config.table-prefix:  mp_
+  #刷新mapper 调试神器
+  #global-config.refresh-mapper:  true
+  #数据库大写下划线转换
+  #global-config.capital-mode:  true
+  # Sequence序列接口实现类配置
+  global-config.key-generator: com.baomidou.mybatisplus.incrementer.OracleKeyGenerator
+  #逻辑删除配置（下面3个配置）
+  global-config.logic-delete-value: 1
+  global-config.logic-not-delete-value: 0
+  global-config.sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+  #自定义填充策略接口实现
+  #global-config.meta-object-handler: com.baomidou.springboot.MyMetaObjectHandler
+
+  #配置返回数据库(column下划线命名&&返回java实体是驼峰命名)，自动匹配无需as（没开启这个，SQL需要写as： select user_id as userId）
+  configuration.map-underscore-to-camel-case: true
+  configuration.cache-enabled: false
+  #配置JdbcTypeForNull, oracle数据库必须配置
+  configuration.jdbc-type-for-null: 'null'
+#  configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
